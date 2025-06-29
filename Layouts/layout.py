@@ -1,18 +1,31 @@
 import os
+
 import customtkinter as ctk
-from PIL import Image #LIbreria Imagen
+from PIL import Image  # Libreria Imagen
 from customtkinter import CTkImage
+
 from Ficheros.AltCentro import *
-from switching.router import mostrar_doctor, mostrar_cita
+from switching.router import mostrar_doctor, mostrar_cita, mostrar_botica, mostrar_resumen
 
 
 # ---------------------- Clases Base Personalizadas ----------------------
 class Botones_P(ctk.CTkButton): pass
+
+
 class Etiqueta_P(ctk.CTkLabel): pass
+
+
 class Entradas_P(ctk.CTkEntry): pass
+
+
 class Cajas_P(ctk.CTkCheckBox): pass
+
+
 class Marcos_P(ctk.CTkFrame): pass
+
+
 class R_Botones_P(ctk.CTkRadioButton): pass
+
 
 # ---------------------- Clase Principal ----------------------
 class Ventana_P(ctk.CTk):
@@ -76,24 +89,31 @@ class Ventana_P(ctk.CTk):
         lbl_logo = Etiqueta_P(m1_izquierdo, image=imagen_ctk, text="")
         lbl_logo.pack(pady=10)
 
-
-        from switching.router import mostrar_paciente #
+        from switching.router import mostrar_paciente  #
         # --- Botones menú izquierdo ---
-        Botones_P(m_izquierdo, text="Paciente", width=180, height=30,command=lambda: mostrar_paciente(self)).pack(pady=10, padx=10)
+        Botones_P(m_izquierdo, text="Paciente", width=180, height=30, command=lambda: mostrar_paciente(self)).pack(
+            pady=10, padx=10)
 
-        Botones_P(m_izquierdo, text="Doctor", width=180, height=30,command=lambda:mostrar_doctor(self)).pack(pady=10, padx=10)
+        Botones_P(m_izquierdo, text="Doctor", width=180, height=30, command=lambda: mostrar_doctor(self)).pack(pady=10,
+                                                                                                               padx=10)
 
-        Botones_P(m_izquierdo, text="Citas", width=180, height=30,command=lambda:mostrar_cita(self)).pack(pady=10, padx=10)
+        Botones_P(m_izquierdo, text="Citas", width=180, height=30, command=lambda: mostrar_cita(self)).pack(pady=10,
+                                                                                                            padx=10)
 
-        Botones_P(m_izquierdo, text="Botica", width=180, height=30).pack(pady=10, padx=10)
+        Botones_P(m_izquierdo, text="Botica", width=180, height=30, command=lambda: mostrar_botica(self)).pack(pady=10,
+                                                                                                               padx=10)
 
-        Botones_P(m_izquierdo, text="Resumen", width=180, height=30).pack(pady=10, padx=10)
+        Botones_P(m_izquierdo, text="Resumen", width=180, height=30, command=lambda: mostrar_resumen(self)).pack(
+            pady=10, padx=10)
 
         # --- Botones inferiores ---
-        Botones_P(m_sidebar, text="<< Atrás", width=200, height=35).grid(row=0, column=0, pady=10, padx=(20, 5), sticky="w")
+        """ Botones_P(m_sidebar, text="<< Atrás", width=200, height=35).grid(row=0, column=0, pady=10, padx=(20, 5),
+                                                                         sticky="w")
+
         Botones_P(m_sidebar, text="Guardar", width=200, height=35).grid(row=0, column=3, pady=10, padx=5)
         Botones_P(m_sidebar, text="Limpiar", width=200, height=35).grid(row=0, column=4, pady=10, padx=5)
-        Botones_P(m_sidebar, text="Avanzar >>", width=200, height=35).grid(row=0, column=7, pady=10, padx=(5, 20), sticky="e")
+        Botones_P(m_sidebar, text="Avanzar >>", width=200, height=35).grid(row=0, column=7, pady=10, padx=(5, 20),
+                                                                           sticky="e")  """
 
     def mostrar_frame(self, frame_class):
         for widget in self.m_cuerpo.winfo_children():

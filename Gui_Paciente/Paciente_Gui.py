@@ -1,9 +1,11 @@
-import customtkinter as ctk
 import datetime
 import tkinter.messagebox as msg
+
+import customtkinter as ctk
 from tkcalendar import DateEntry
-from Ficheros.custom_widgets import Marcos_P, Etiqueta_P, Entradas_P, Botones_P
+
 from Ficheros.MapsView.map_widget import MapWidget
+from Ficheros.custom_widgets import Marcos_P, Etiqueta_P, Entradas_P, Botones_P
 from Gui_Paciente.Paciente_Crud import Paciente
 
 
@@ -72,7 +74,6 @@ class PacienteFrame(Marcos_P):
         Botones_P(f_botones, text="Guardar", command=self.guardar_paciente, width=100, height=32).pack(pady=(5, 10))
         Botones_P(f_botones, text="Limpiar", command=self.limpiar_campos, width=100, height=32).pack(pady=(0, 15))
 
-
         # MARCO DERECHO - MAPA
         frame_mapa = Marcos_P(
             master=contenedor,
@@ -92,16 +93,16 @@ class PacienteFrame(Marcos_P):
         self.entry_direccion = Entradas_P(frame_mapa, width=400)
         self.entry_direccion.pack(fill="x", padx=10, pady=(0, 10))
 
-        # Callback para que el mapa actualice el campo de dirección automáticamente
+        # Callback para que el mapa actualize el campo de dirección automáticamente
         self.mapa_widget.on_address_change(lambda addr: (
             self.entry_direccion.delete(0, ctk.END),
             self.entry_direccion.insert(0, addr)
         ))
 
-    def guardar_paciente(self) :
+    def guardar_paciente(self):
 
         # Sincroniza la dirección desde el mapa antes de leer el campo
-        if hasattr(self.mapa_widget, "address_entry") :
+        if hasattr(self.mapa_widget, "address_entry"):
             direccion_mapa = self.mapa_widget.address_entry.get().strip()
             self.entry_direccion.delete(0, ctk.END)
             self.entry_direccion.insert(0, direccion_mapa)
@@ -119,9 +120,8 @@ class PacienteFrame(Marcos_P):
         email = self.campos["Email"].get().strip()
         telefono = self.campos["Teléfono"].get().strip()
 
-
         # Validación visual
-        if not direccion :
+        if not direccion:
             msg.showwarning("Dirección requerida", "⚠️ Debes seleccionar una dirección en el mapa antes de guardar.")
             return
 
@@ -137,11 +137,9 @@ class PacienteFrame(Marcos_P):
         )
         print("✅ Paciente guardado con dirección:", direccion)
 
-
-
-    def limpiar_campos(self) :
+    def limpiar_campos(self):
         # Campos de texto
-        for campo in self.campos.values() :
+        for campo in self.campos.values():
             campo.delete(0, "end")
 
         # Fecha
@@ -152,10 +150,10 @@ class PacienteFrame(Marcos_P):
         # 1) borrar entrada interna
         self.mapa_widget.address_entry.delete(0, ctk.END)
         # 2) eliminar marcador si existe
-        if hasattr(self.mapa_widget, "marker") and self.mapa_widget.marker :
+        if hasattr(self.mapa_widget, "marker") and self.mapa_widget.marker:
             self.mapa_widget.marker.delete()
             self.mapa_widget.marker = None
-        # 3) resetear posición y zoom
-        self.mapa_widget.map_widget.set_position(-2.170998, -79.922356)
-        self.mapa_widget.map_widget.set_zoom(13)
 
+        # 3) reset ear position y zoom
+        self.mapa_widget.map_widget.set_position(-2.170998, -79.922356)
+        self.mapa_widget.map_widget.set_zoom(10)

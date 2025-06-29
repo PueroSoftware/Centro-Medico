@@ -1,4 +1,4 @@
-import datetime
+# import datetime
 import os
 from datetime import datetime
 from tkinter import filedialog
@@ -12,8 +12,8 @@ from Ficheros.Pdf_Widget import GeneradorPDF
 from Ficheros.custom_widgets import Marcos_P, Etiqueta_P, Entradas_P, Botones_P
 
 
-class CitaFrame(Marcos_P) :
-    def __init__(self, master=None) :
+class CitaFrame(Marcos_P):
+    def __init__(self, master=None):
         super().__init__(master=master, fg_color="black")
         self.pack(fill="both", expand=True)
 
@@ -56,7 +56,7 @@ class CitaFrame(Marcos_P) :
                                                                                                    pady=(5, 5))
 
         self.campos = {}
-        for campo in ["Nombres:", "Apellidos:", "Cedula Id:"] :
+        for campo in ["Nombres:", "Apellidos:", "Cedula Id:"]:
             Etiqueta_P(marco_info, text=campo).pack(anchor="w", padx=10)
             entry = Entradas_P(marco_info)
             entry.pack(padx=10, pady=5, fill="x")
@@ -100,7 +100,7 @@ class CitaFrame(Marcos_P) :
         # --- Ruta al ícono PDF ---
         ruta_icono_pdf = os.path.join(ruta_img, "pdf.png")
 
-        try :
+        try:
             self.icono_pdf = CTkImage(
                 light_image=Image.open(ruta_icono_pdf),
                 size=(120, 70)
@@ -118,7 +118,7 @@ class CitaFrame(Marcos_P) :
             )
             self.botn_pdf.pack(pady=(5, 10))
 
-        except FileNotFoundError :
+        except FileNotFoundError:
             self.icono_pdf = None
             print(f"⚠️ Advertencia: La imagen 'pdf.png' no se encontró en: {ruta_icono_pdf}")
 
@@ -129,31 +129,31 @@ class CitaFrame(Marcos_P) :
         Botones_P(frame_botones, text="Guardar", width=150, command=self.guardar_datos).pack(side="left", padx=20)
         Botones_P(frame_botones, text="Limpiar", width=150, command=self.limpiar_campos).pack(side="left", padx=20)
 
-    def guardar_datos(self) :
+    def guardar_datos(self):
         datos_cita = {
-            "codigo_cita" : self.codigo_cita.get(),
-            "codigo_paciente" : self.codigo_paciente.get(),
-            "nombres" : self.campos["Nombres"].get(),
-            "apellidos" : self.campos["Apellidos"].get(),
-            "cedula_id" : self.campos["Cedula Id"].get(),
-            "fecha" : self.date_entry.get(),
-            "hora" : f"{self.hora_entry.get()}:{self.min_entry.get()}",
-            "motivo" : self.motivo_text.get("1.0", "end").strip()
+            "codigo_cita": self.codigo_cita.get(),
+            "codigo_paciente": self.codigo_paciente.get(),
+            "nombres": self.campos["Nombres"].get(),
+            "apellidos": self.campos["Apellidos"].get(),
+            "cedula_id": self.campos["Cedula Id"].get(),
+            "fecha": self.date_entry.get(),
+            "hora": f"{self.hora_entry.get()}:{self.min_entry.get()}",
+            "motivo": self.motivo_text.get("1.0", "end").strip()
         }
 
         print("📋 Datos recopilados:")
-        for clave, valor in datos_cita.items() :
+        for clave, valor in datos_cita.items():
             print(f"{clave}: {valor}")
 
         # Guardar los datos para posterior uso (por ejemplo, exportar_pdf)
         self.datos_para_pdf = datos_cita
 
-    def limpiar_campos(self) :
+    def limpiar_campos(self):
         self.codigo_cita.delete(0, "end")
         self.codigo_paciente.delete(0, "end")
         self.motivo_text.delete("1.0", "end")
 
-        for campo in self.campos.values() :
+        for campo in self.campos.values():
             campo.delete(0, "end")
 
         self.hora_entry.delete(0, "end")
@@ -163,16 +163,16 @@ class CitaFrame(Marcos_P) :
         self.date_entry.set_date(datetime.date.today())
 
         # Limpia datos temporales si existen
-        if hasattr(self, "datos_para_pdf") :
+        if hasattr(self, "datos_para_pdf"):
             del self.datos_para_pdf
 
         # Opcional: enfocar en el primer campo
         self.codigo_cita.focus()
 
-    def exportar_pdf(self) :
-        try :
+    def exportar_pdf(self):
+        try:
             datos = self.datos_para_pdf
-        except AttributeError :
+        except AttributeError:
             print("⚠️ Debes guardar los datos antes de exportar el PDF.")
             return
 
@@ -182,7 +182,7 @@ class CitaFrame(Marcos_P) :
             title="Guardar cita como PDF"
         )
 
-        if not archivo :
+        if not archivo:
             return
 
         pdf = GeneradorPDF(datos, archivo)

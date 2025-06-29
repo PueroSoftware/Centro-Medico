@@ -1,8 +1,8 @@
-
 import customtkinter as ctk
-from tkintermapview import TkinterMapView
-from geopy.geocoders import OpenCage
 from geopy.exc import GeocoderUnavailable
+from geopy.geocoders import OpenCage
+from tkintermapview import TkinterMapView
+
 
 class MapWidget(ctk.CTkFrame):
     def __init__(self, master=None):
@@ -23,7 +23,7 @@ class MapWidget(ctk.CTkFrame):
         self.map_widget.pack(fill="both", expand=True, padx=10, pady=10)
 
         self.map_widget.set_position(-2.170998, -79.922356)
-        self.map_widget.set_zoom(20)
+        self.map_widget.set_zoom(13)
 
         self.map_widget.add_right_click_menu_command(
             label="Añadir marcador",
