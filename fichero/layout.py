@@ -1,5 +1,4 @@
 import os
-
 import customtkinter as ctk
 from PIL import Image  # Libreria Imagen
 from customtkinter import CTkImage

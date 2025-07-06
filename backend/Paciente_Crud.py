@@ -1,7 +1,7 @@
 """ CRUD para la tabla Pacientes usando pymysql """
 from fichero.conexion import obtener_conexion
 
-
+@staticmethod
 def crear_paciente(cedula_id, nombres, apellidos, fecha_nacimiento, sexo, email, telefono, direccion) :
     """
     Inserta un nuevo paciente.
@@ -101,6 +101,21 @@ def actualizar_paciente(id_paciente, cedula_id, nombres, apellidos,fecha_nacimie
             conexion.close()
 
 
+def buscar_paciente_por_cedula(cedula):
+    conexion = obtener_conexion()
+    try:
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT * FROM Pacientes WHERE cedula_id = %s", (cedula,))
+            fila = cursor.fetchone()
+            if fila:
+                return fila  # fila ya es un diccionario porque usas DictCursor
+            else:
+                return None
+    finally:
+        conexion.close()
+
+
+
 def eliminar_paciente(id_paciente) :
     """ Elimina lógicamente un paciente por ID (cambia estado_activo a FALSE) """
     try :
@@ -110,50 +125,11 @@ def eliminar_paciente(id_paciente) :
                 sql = "UPDATE Pacientes SET estado_activo = FALSE WHERE id_paciente = %s"
                 cursor.execute(sql, (id_paciente,))
             conexion.commit()
-            print("🗑️ Paciente eliminado correctamente (borrado lógico).")
+            print(" Paciente eliminado correctamente (borrado lógico).")
     except Exception as e :
         print(f"❌ Error al eliminar paciente: {e}")
     finally :
         if conexion :
             conexion.close()
-
-
-if __name__ == "__main__":
-    print("🧪 Ejecutando prueba directa de inserción...\n")
-
-    crear_paciente(
-        cedula_id="9876543210",
-        nombres="Sofía",
-        apellidos="Jiménez Moreno",
-        fecha_nacimiento="1993-11-15",
-        sexo="Femenino",
-        email="sofia.jimenez@example.com",
-        telefono="0981234567",
-        direccion="Av. 9 de Octubre y Loja, Guayaquil"
-    )
-    crear_paciente(
-        cedula_id="1002003001",
-        nombres="Carlos Andrés",
-        apellidos="Muñoz Vera",
-        fecha_nacimiento="1990-05-12",
-        sexo="Masculino",
-        email="carlos.munoz@example.com",
-        telefono="0999999991",
-        direccion="Av. Quito y Sucre, Cuenca"
-    )
-crear_paciente(
-    cedula_id="1002003003",
-    nombres="José Ángel",
-    apellidos="Rodríguez Méndez",
-    fecha_nacimiento="1975-01-30",
-    sexo="Masculino",
-    email="jose.angel@example.com",
-    telefono="0977777773",
-    direccion="Cdla. El Paraíso, Machala"
-)
-print("\n📋 Pacientes activos en la base de datos:")
-pacientes = obtener_pacientes()
-for p in pacientes:
-    print(p)
 
 

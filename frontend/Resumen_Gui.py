@@ -80,7 +80,7 @@ class ResumenFrame(ctk.CTkFrame):
             width=180,
             height=35,
             fg_color="#0D47A1",
-            hover_color="#1565C0",
+            hover_color="transparent",
             font=("Roboto", 14, "bold"),
             command=self.generar_pdf
         ).pack(pady=(20, 10), anchor="center")

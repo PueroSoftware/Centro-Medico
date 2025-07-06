@@ -45,23 +45,42 @@ CREATE TABLE RegistroAsistencia (
 
 CREATE TABLE Citas (
     id_cita INT PRIMARY KEY AUTO_INCREMENT,
-    id_paciente INT,
+    id_paciente INT ,
     id_doctor INT,
-    fecha_hora_cita DATETIME,
-    motivo_cita TEXT,
-    estado_cita VARCHAR(50),
+    fecha_cita DATE,
+    hora_cita TIME,
+    motivo_cita TINYTEXT,
+    estado_cita BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (id_paciente) REFERENCES Pacientes(id_paciente),
     FOREIGN KEY (id_doctor) REFERENCES Doctores(id_doctor)
 );
 
-CREATE TABLE Medicamentos (
-    id_medicamento INT PRIMARY KEY AUTO_INCREMENT,
-    codigo_medicamento VARCHAR(50),
-    nombre_medicamento VARCHAR(255),
-    descripcion_medicamento TEXT,
-    presentacion VARCHAR(100),
-    laboratorio VARCHAR(100),
-    precio_unitario DECIMAL(10,2),
-    stock_actual INT,
-    fecha_caducidad DATE
+CREATE TABLE farmaco (
+    id_farmaco INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_farmaco VARCHAR(50) NOT NULL,
+    nombre_farmaco VARCHAR(255) NOT NULL,
+    presentacion VARCHAR(100) NOT NULL,
+    laboratorio VARCHAR(100) NOT NULL,
+    stock_actual INT UNSIGNED NOT NULL DEFAULT 0,
+    fecha_caducidad DATE NOT NULL,
+    -- Índices adicionales para consultas rápidas
+    INDEX idx_codigo (codigo_medicamento),
+    INDEX idx_nombre (nombre_medicamento)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE despacho (
+    id_despacho INT AUTO_INCREMENT PRIMARY KEY,
+    cedula_paciente VARCHAR(20) NOT NULL,
+    id_farmaco INT NOT NULL,
+    cantidad INT NOT NULL,
+    fecha_despacho DATE NOT NULL,
+    FOREIGN KEY (id_farmaco) REFERENCES farmaco(id_farmaco)
 );
+
+
+
+
+
+
+
+

@@ -69,6 +69,23 @@ def crear_especialidad(nombre):
             conexion.close()
 
 
+def obtener_especialidades_unicas():
+    """
+    Devuelve una lista de especialidades distintas de la tabla Doctores.
+    """
+    conexion = obtener_conexion()
+    try:
+        with conexion.cursor() as cursor:
+            cursor.execute("SELECT DISTINCT especialidad_doctor FROM Doctores")
+            filas = cursor.fetchall()
+            # Extraer solo los valores como lista
+            return [fila['especialidad_doctor'] for fila in filas]
+    except Exception as e:
+        print(f"❌ Error obteniendo especialidades: {e}")
+        return []
+    finally:
+        conexion.close()
+
 #  Insertar entrada del doctor usando cédula como referencia
 def registrar_entrada(cedula, fecha, hora_entrada):
     """
