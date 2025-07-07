@@ -2,7 +2,7 @@ from frontend.Botica_Gui import BoticaFrame
 from frontend.Cita_Gui import CitaFrame
 from frontend.Doctor_Gui import DoctorGui
 from frontend.Paciente_Gui import PacienteFrame
-from frontend.Resumen_Gui import ResumenFrame
+from frontend.Receta_Gui import ResumenFrame
 
 
 def mostrar_paciente(ventana):

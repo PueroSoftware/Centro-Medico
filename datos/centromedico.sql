@@ -49,7 +49,7 @@ CREATE TABLE Citas (
     id_doctor INT,
     fecha_cita DATE,
     hora_cita TIME,
-    motivo_cita TINYTEXT,
+    motivo_cita TEXT,
     estado_cita BOOLEAN DEFAULT TRUE,
     FOREIGN KEY (id_paciente) REFERENCES Pacientes(id_paciente),
     FOREIGN KEY (id_doctor) REFERENCES Doctores(id_doctor)
