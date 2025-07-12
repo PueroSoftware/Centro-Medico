@@ -1,5 +1,4 @@
 from datetime import datetime
-
 import pymysql.cursors
 from dateutil.relativedelta import relativedelta
 from fichero.conexion import obtener_conexion
@@ -23,7 +22,7 @@ class crear_despacho:
         fecha_produccion = datetime.strptime(fecha_produccion_str, "%Y-%m-%d")
         fecha_caducidad = fecha_produccion + relativedelta(months=+meses)
         return fecha_caducidad.strftime("%Y-%m-%d")
-#######
+
     def verificar_stock_caducidad(self, id_farmaco, cantidad_solicitada, fecha_actual_str) :
         """
         Verifica que haya stock suficiente y que el medicamento no esté caducado.
@@ -64,7 +63,7 @@ class crear_despacho:
             print("❌ Error al verificar stock y caducidad:", e)
             return False, "Error en verificación"
 
-    ##########
+
     def registrar_despacho(self, cedula_paciente, id_farmaco, cantidad, fecha_despacho):
         """Registra el despacho y actualiza el stock."""
         try:
