@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7680147c-5609-4f34-ac4c-37c56d49f708" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/AdminFrame.py" beforeDir="false" afterPath="$PROJECT_DIR$/AdminFrame.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/Despacho_Crud.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/Despacho_Crud.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +68,7 @@
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Owner/Desktop/ITSGG/SegundoSemestre/Programacion/Proyecto_Medico&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Owner/Desktop/ITSGG/SegundoSemestre/CenMedico_TkGitlab&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
